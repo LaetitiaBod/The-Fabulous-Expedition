@@ -21,6 +21,7 @@ public class Inventory
 	public ItemData goldenNecklace = new ItemData();
 	public ItemData goldenLama = new ItemData();
 	public ItemData goldenMask = new ItemData();
+	public ItemData torch = new ItemData();
 
 	public ItemSlotsList itemSlotsList = new ItemSlotsList();
 
@@ -39,6 +40,7 @@ public class Inventory
 			new InventoryItem(meat, 1),
 			new InventoryItem(cheese, 3),
 			new InventoryItem(goldenMask, 1),
+			new InventoryItem(torch, 1),
 		};
 
 		AddStartingItems();
@@ -96,6 +98,7 @@ public class Inventory
 		goldenNecklace = new ItemData(ItemType.Loot, graphicsManager.GetTexture("goldenNecklace"), "Golden necklace", 10, 30, 0);
 		goldenLama = new ItemData(ItemType.Loot, graphicsManager.GetTexture("goldenLama"), "Golden lama", 15, 50, 0);
 		goldenMask = new ItemData(ItemType.Loot, graphicsManager.GetTexture("goldenMask"), "Golden mask", 20, 70, 0);
+		torch = new ItemData(ItemType.Loot, graphicsManager.GetTexture("torch"), "Torch", 5, 0, 0);
 	}
 
 	private void AddStartingItems()
@@ -171,7 +174,6 @@ public class Inventory
 				if(player.encounterState.currentEncounter.name == "Village") {
 					player.encounterState.currentEncounter.TradeItem(_item);
 				}
-
 			}
 		}
 		else if (_item.inventoryItem.data.type == ItemType.Loot)
@@ -185,7 +187,6 @@ public class Inventory
 				{
 					player.encounterState.currentEncounter.TradeItem(_item);
 				}
-
 			}
 		}
 		else

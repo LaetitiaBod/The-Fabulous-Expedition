@@ -20,11 +20,12 @@ public class Button
 	public int fontSize { get; set; } = 30;
 	public Color originalColor { get; set; }
 	public bool isClicked { get; set; } = false;
+	public bool isDisabled { get; set; } = false;
 }
 
 public class ButtonsList
 {
-	private List<Button> buttonList = new List<Button>();
+	public List<Button> buttonList = new List<Button>();
 	public Mouse mouse = new Mouse();
 
 	public void AddButton(Button button)
@@ -52,17 +53,25 @@ public class ButtonsList
 		foreach (Button button in buttonList)
 		{
 			button.isClicked = false;
-			if (CheckCollisionPointRec(mousePos, button.rect))
+			if(!button.isDisabled)
 			{
-				button.textColor = Color.Red;
-				if (IsMouseButtonPressed(MouseButton.Left))
+				if (CheckCollisionPointRec(mousePos, button.rect))
 				{
-					button.isClicked = true;
+					button.textColor = Color.Red;
+					if (IsMouseButtonPressed(MouseButton.Left))
+					{
+						button.isClicked = true;
+					}
+				}
+				else
+				{
+					button.textColor = button.originalColor;
 				}
 			}
 			else
 			{
-				button.textColor = button.originalColor;
+				button.textColor = Color.Gray;
+				button.originalColor = Color.Gray;
 			}
 		}
 	}

@@ -24,21 +24,11 @@ public class Map
 	public Player player = ServiceLocator.GetService<Player>();
 	public FogOfWar fogOfWar;
 
-	//public List<TileType> tileTypesList = new List<TileType>
-	//{
-	//	new TileType( 26, "Water", 100 ),
-	//	new TileType( 27, "Island", 100 ),
-	//	new TileType( 28, "Grass", 1 ),
-	//	new TileType( 29, "Mountain", 100 ),
-	//	new TileType( 30, "Forest", 5 ),
-	//	new TileType( 45, "Pyramid", 0 , true ),
-	//};
-
 	public List<TileType> tileTypesList = new List<TileType>
 	{
 		new TileType( 0, "Grass", 1 ),
 		new TileType( 1, "LightForest", 2 ),
-		new TileType( 2, "Mountain", 100 ),
+		new TileType( 2, "Mountain", 0 ),
 		new TileType( 3, "Pyramid", 0 , true ),
 		new TileType( 4, "Question_mark", 0 ),
 		new TileType( 5, "Sanctuary", 0, true ),
@@ -48,7 +38,8 @@ public class Map
 		new TileType( 11, "DenseForest", 8 ),
 		new TileType( 12, "Desert", 5 ),
 		new TileType( 13, "Fog", 5 ),
-		new TileType( 14, "Water", 100 ),
+		new TileType( 14, "Water", 0 ),
+		new TileType( 15, "Cave", 0, true ),
 	};
 
 	public List<Encounter> encounterList;
@@ -88,6 +79,8 @@ public class Map
 				encounterList.Add(new EncounterVillage(tileType.name, new Vector2(currentTile.X, currentTile.Y), false));
 			if (tileType.name == "Sanctuary")
 				encounterList.Add(new EncounterSanctuary(tileType.name, new Vector2(currentTile.X, currentTile.Y), false));
+			if (tileType.name == "Cave")
+				encounterList.Add(new EncounterCave(tileType.name, new Vector2(currentTile.X, currentTile.Y), false));
 		}
 
 		spriteWidth = tmxMap.Tilesets[0].TileWidth;
@@ -217,9 +210,12 @@ public class Map
 
 	public bool isTileWalkable(Location _location)
 	{
-		if (_location.tileType.name == "Mountain" || _location.tileType.name == "Water")
-			return false;
+		if(encounterList.Find(e => e.coords == _location.coords) == null)
+		{
+			if (_location.tileType.name == "Mountain" || _location.tileType.name == "Water")
+				return false;
 
+		}
 		return true;
 	}
 }

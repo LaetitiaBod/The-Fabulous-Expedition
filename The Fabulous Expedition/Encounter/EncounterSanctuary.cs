@@ -14,8 +14,8 @@ public class EncounterSanctuary : Encounter
 	public int speedFrame = 5;
 
 	private Texture2D textureBook;
-	private Texture2D slot;
 	private Rectangle placeholder;
+	private Texture2D slot;
 	private float sizeSlot;
 
 	private Button confirmButton;
@@ -171,7 +171,6 @@ public class EncounterSanctuary : Encounter
 			inventory.goldenLama
 		};
 
-		Random? randomItem = new Random();
 		int numberOfItems = 2;
 
 		for (int i = 0; i < numberOfItems; i++)

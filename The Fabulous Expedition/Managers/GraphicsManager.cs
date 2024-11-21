@@ -44,6 +44,20 @@ public class GraphicsManager
 		AddTexture("mountains", "resources/images/menu/mountains.png");
 		AddTexture("trees", "resources/images/menu/trees.png");
 		AddTexture("settingsBg", "resources/images/menu/settingsBg.png");
+		// village
+		for (int i = 0; i <= 57; i++)
+		{
+			AddTexture("village-" + i, "resources/images/encounter/village/965cab86-1682-453c-8bb7-8779dae159b6-" + i + ".png");
+		}
+		// sanctuary
+		for (int i = 0; i <= 57; i++)
+		{
+			AddTexture("sanctuary-" + i, "resources/images/encounter/sanctuary/07da6561-3d07-4599-ab34-a7e4124783ce-" + i + ".png");
+		}
+		AddTexture("victoryBg", "resources/images/encounter/pyramide.png");
+		AddTexture("caveBg", "resources/images/encounter/cave entrée.png");
+		AddTexture("caveInside", "resources/images/encounter/cave intérieur.png");
+
 
 		// TEXT
 		AddTexture("title", "resources/images/menu/The-Fabulous-Expedition-extra.png");
@@ -60,6 +74,7 @@ public class GraphicsManager
 		AddTexture("goldenNecklace", "resources/images/inventory/Golden Necklace.png");
 		AddTexture("goldenLama", "resources/images/inventory/Golden Lama.png");
 		AddTexture("goldenMask", "resources/images/inventory/Golden Mask.png");
+		AddTexture("torch", "resources/images/inventory/Torch.png");
 
 		// TILES
 		for (int i = 0; i < tmxMap.Tilesets[0].Tiles.Count; i++)
@@ -73,17 +88,6 @@ public class GraphicsManager
 			AddTexture("raylib-logo-" + i, "resources/images/UI/raylib_logo_animation/fb465072-4653-46f9-840b-688a2fbece13-" + i + ".png");
 		}
 
-		// village
-		for (int i = 0; i <= 57; i++)
-		{
-			AddTexture("village-" + i, "resources/images/encounter/village/965cab86-1682-453c-8bb7-8779dae159b6-" + i + ".png");
-		}
-
-		// sanctuary
-		for (int i = 0; i <= 57; i++)
-		{
-			AddTexture("sanctuary-" + i, "resources/images/encounter/sanctuary/07da6561-3d07-4599-ab34-a7e4124783ce-" + i + ".png");
-		}
 	}
 
 	public Font GetFont(string name)
@@ -103,10 +107,6 @@ public class GraphicsManager
 
 	public void AddAllFonts()
 	{
-		AddFont("dogica", "resources/fonts/dogica.ttf");
-		AddFont("times new roman", "resources/fonts/times new roman.ttf");
-		AddFont("dot gothic", "resources/fonts/DotGothic16-Regular.ttf");
-		AddFont("typewriter", "resources/fonts/XTypewriter-Regular.ttf");
 		AddFont("helvetica", "resources/fonts/Helvetica.ttf");
 	}
 

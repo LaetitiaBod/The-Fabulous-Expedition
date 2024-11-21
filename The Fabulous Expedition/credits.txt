@@ -1,0 +1,33 @@
+library TiledSharp
+https://github.com/marshallward/TiledSharp
+
+software Tiled
+https://www.mapeditor.org/
+
+This project was developed as part of a training course. 
+Given its educational nature, the gameplay and most of the graphics were borrowed from
+The Curious Expedition game, developed and published by Maschinen-Mensch.
+Steam page: https://store.steampowered.com/app/358130/Curious_Expedition/
+
+Sanctuary, Village artworks from fran747
+https://www.pixilart.com/fran747
+https://www.pixilart.com/art/village-dd0af1796837?ft=user&ft_id=1282056
+https://www.pixilart.com/art/torii-gate-sr2867cc2e6ea12?ft=user&ft_id=1282056
+
+Music and graphics menu
+https://assetstore.unity.com/packages/2d/textures-materials/tiles/parallax-dusk-mountain-background-53403
+
+Gameplay music
+https://assetstore.unity.com/packages/audio/ambient/nature/sounds-of-australia-natural-ambiences-239337
+
+Some UI from kenney
+https://www.kenney.nl/assets/ui-pack-adventure
+
+Some icons
+https://assetstore.unity.com/packages/2d/gui/icons/pixel-art-icon-pack-rpg-158343
+
+Player assets
+https://cuddle-bug.itch.io/apocalypse
+
+Fonts
+https://www.dafontfree.io/helvetica-font-free/
