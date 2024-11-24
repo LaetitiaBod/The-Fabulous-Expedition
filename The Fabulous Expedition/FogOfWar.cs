@@ -7,7 +7,7 @@ using TiledSharp;
 public class FogOfWar
 {
 	private Texture2D texture;
-	private int detectionRange = 4;
+	private int detectionRange = 5;
 	public bool isVisited = false;
 	public Vector2 coords = new Vector2();
 	public List<FogOfWar> fogOfWarList;

@@ -284,8 +284,6 @@ public class EncounterVillage : Encounter
 		wasInitialized = true;
 	}
 
-	
-
 	public override void TradeItem(ItemSlot _item)
 	{
 		switch(_item.origin)

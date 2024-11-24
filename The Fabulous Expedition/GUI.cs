@@ -208,6 +208,11 @@ public class ItemSlotsList
 					ServiceLocator.GetService<Inventory>().UseItem(item);
 					return;
 				}
+				else if (IsMouseButtonPressed(MouseButton.Right))
+				{
+					ServiceLocator.GetService<Inventory>().RemoveItemFromDict(ServiceLocator.GetService<Inventory>().stashDict, item.inventoryItem.data);
+					return;
+				}
 			}
 			else
 			{
@@ -231,7 +236,7 @@ public class ItemSlotsList
 				ServiceLocator.GetService<GraphicsManager>().GetFont("helvetica"),
 				item.inventoryItem.stackSize.ToString(),
 				new Vector2(item.rect.X + 12, item.rect.Y + item.rect.Height - 30),
-				item.fontSize, 1, Color.Brown
+				item.fontSize, 1, Color.White
 			);
 			if(item.isOverflown)
 			{
@@ -239,7 +244,7 @@ public class ItemSlotsList
 				Rectangle placeholder = new Rectangle(
 					ServiceLocator.GetService<GameManager>().gameScreenWidth*4/5,
 					ServiceLocator.GetService<GameManager>().gameScreenHeight - 250,
-					ServiceLocator.GetService<GameManager>().gameScreenWidth/7, 150);
+					ServiceLocator.GetService<GameManager>().gameScreenWidth/7, 170);
 				NPatchInfo ninePatchInfoBar = new NPatchInfo
 				{
 					Source = new Rectangle(0f, 0f, texture.Width, texture.Height),
@@ -256,6 +261,9 @@ public class ItemSlotsList
 				DrawTextEx(
 					ServiceLocator.GetService<GraphicsManager>().GetFont("helvetica"), description,
 					new Vector2(placeholder.X + 20, placeholder.Y + 20), item.fontSize, 1, Color.White);
+				DrawTextEx(
+					ServiceLocator.GetService<GraphicsManager>().GetFont("helveticaBold"), "Right click to delete one item",
+					new Vector2(placeholder.X + 20, placeholder.Y + placeholder.Height - 30), 15, 1, Color.Purple);
 				DrawRectangleLinesEx(item.rect, 2, Color.Red);
 			}
 		}

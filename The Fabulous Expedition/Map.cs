@@ -3,6 +3,8 @@ using System.Numerics;
 using static Raylib_cs.Raylib;
 using static Program;
 using TiledSharp;
+using static System.Formats.Asn1.AsnWriter;
+
 
 public class Map
 {
@@ -24,13 +26,15 @@ public class Map
 	public Player player = ServiceLocator.GetService<Player>();
 	public FogOfWar fogOfWar;
 
+	public Animator animWolf;
+
 	public List<TileType> tileTypesList = new List<TileType>
 	{
 		new TileType( 0, "Grass", 1 ),
 		new TileType( 1, "LightForest", 2 ),
 		new TileType( 2, "Mountain", 0 ),
 		new TileType( 3, "Pyramid", 0 , true ),
-		new TileType( 4, "Question_mark", 0 ),
+		new TileType( 4, "QuestionMark", 0 ),
 		new TileType( 5, "Sanctuary", 0, true ),
 		new TileType( 6, "Village", 0, true ),
 		new TileType( 7, "Shelter", 0, true ),
@@ -40,6 +44,8 @@ public class Map
 		new TileType( 13, "Fog", 5 ),
 		new TileType( 14, "Water", 0 ),
 		new TileType( 15, "Cave", 0, true ),
+		new TileType( 16, "ElephantCemetery", 0, true ),
+		new TileType( 17, "Hunt", 0, true ),
 	};
 
 	public List<Encounter> encounterList;
@@ -54,6 +60,7 @@ public class Map
 		playerTile = new TmxLayerTile(0, 0, 0);
 		fogOfWar = new FogOfWar();
 		encounterList = new List<Encounter>();
+		animWolf = ServiceLocator.GetService<GraphicsManager>().WolfIdle();
 	}
 
 	public void Show()
@@ -81,6 +88,10 @@ public class Map
 				encounterList.Add(new EncounterSanctuary(tileType.name, new Vector2(currentTile.X, currentTile.Y), false));
 			if (tileType.name == "Cave")
 				encounterList.Add(new EncounterCave(tileType.name, new Vector2(currentTile.X, currentTile.Y), false));
+			if (tileType.name == "ElephantCemetery")
+				encounterList.Add(new EncounterElephantCemetery(tileType.name, new Vector2(currentTile.X, currentTile.Y), false));
+			if (tileType.name == "Hunt")
+				encounterList.Add(new EncounterHunt(tileType.name, new Vector2(currentTile.X, currentTile.Y), true));
 		}
 
 		spriteWidth = tmxMap.Tilesets[0].TileWidth;
@@ -88,11 +99,16 @@ public class Map
 
 		tileWidth = tmxMap.TileWidth;
 		tileHeight = tmxMap.TileHeight;
+
+		player.position = player.ConvertMapToPixelPosition(new Vector2(30, 24));
+
+		animWolf = ServiceLocator.GetService<GraphicsManager>().WolfIdle();
 	}
 
 	public void Update() {
 		mousePos = GetScreenToWorld2D(mouse.GetMousePosition(), ServiceLocator.GetService<GameManager>().camera);
 
+		// update the mouse tile and the player tile
 		for (int nLayer = 0; nLayer < tmxMap.Layers.Count; nLayer++)
 		{
 			for (int i = 0; i < tmxMap.Layers[nLayer].Tiles.Count; i++)
@@ -119,6 +135,8 @@ public class Map
 		ServiceLocator.GetService<DebugManager>().AddOption("mouse y", mousePos.Y);
 
 		fogOfWar.Update();
+
+		animWolf.Update();
 	}
 
 	public void Draw()
@@ -128,9 +146,10 @@ public class Map
 			for (int i = 0; i < tmxMap.Layers[nLayer].Tiles.Count; i++)
 			{
 				TmxLayerTile currentTile = tmxMap.Layers[nLayer].Tiles[i];
-
 				if (currentTile.Gid != 0)
 				{
+					if (nLayer == 1)
+						Console.WriteLine("");
 					int tileFrame = currentTile.Gid - 1;
 					textureToDisplay = tilesTextures[tileFrame];
 
@@ -138,12 +157,23 @@ public class Map
 					float y = (float)currentTile.Y * (tileHeight) - (tilesTextures[tileFrame].Height - tileHeight);
 
 					Rectangle tilesetRec = new Rectangle(x, y, tileWidth, tilesTextures[tileFrame].Height);
+					Rectangle srcRect = new Rectangle(0, 0, spriteWidth, tilesTextures[tileFrame].Height);
 					Encounter? encounter = encounterList.Find(encounter => encounter.coords.X == currentTile.X && encounter.coords.Y == currentTile.Y);
 
+					// display the question mark
 					if (nLayer == 1 && encounter != null && !encounter.isRevealed)
-						textureToDisplay = tilesTextures[tileTypesList.Find(t => t.name == "Question_mark").id];
+					{
+						textureToDisplay = tilesTextures[tileTypesList.Find(t => t.name == "QuestionMark").id];
+					}
+					
+					// Hunt animation
+					if(nLayer == 1 && encounter != null && encounter.name == "Hunt" && encounter.isRevealed)
+					{
+						textureToDisplay = animWolf.texture;
+						srcRect = animWolf.rectFrame;
+					} 
 
-					DrawTexturePro(textureToDisplay, new Rectangle(0, 0, spriteWidth, tilesTextures[tileFrame].Height), tilesetRec, new Vector2(0, 0), 0, Color.White);
+					DrawTexturePro(textureToDisplay, srcRect, tilesetRec, new Vector2(0, 0), 0, Color.White);
 
 					string text = currentTile.X.ToString() + "," + currentTile.Y.ToString();
 					DrawTextEx(ServiceLocator.GetService<GraphicsManager>().GetFont("helvetica"), text, new Vector2(x, currentTile.Y * tileHeight), 40, 1, Color.White);

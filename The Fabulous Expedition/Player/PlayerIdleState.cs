@@ -20,7 +20,6 @@ public class PlayerIdleState : PlayerState
 	private Button enterButton;
 	private ButtonsList buttonsEncounter = new ButtonsList();
 	private int buttonLength = 200;
-	private bool wasClicked = false;
 
 	public PlayerIdleState(Player _player, PlayerStateMachine _stateMachine, Animator _anim) : base(_player, _stateMachine, _anim)
 	{
@@ -50,16 +49,25 @@ public class PlayerIdleState : PlayerState
 
 		// player is on an encounter
 		currentEncounter = map.encounterList.Find(e => e.coords == player.ConvertPixelToMapPosition(player.position));
+		
+		// player is starving to death
+		if(player.currentFood <= 0)
+		{
+			currentEncounter = new EncounterGameOver("gameOver", player.ConvertPixelToMapPosition(player.position), true);
+			player.encounterState.currentEncounter = currentEncounter;
+			stateMachine.ChangeState(player.encounterState);
+			return;
+		}
+
 		if (currentEncounter != null)
 		{
-			//if (!wasClicked)
-			//{
-				buttonsEncounter.mouse = new Mouse(true);
-				buttonsEncounter.Update();
-			//}
+			if (currentEncounter.name == "Hunt")
+				enterButton.text = "Attack";
+			buttonsEncounter.mouse = new Mouse(true);
+			buttonsEncounter.Update();
+
 			if (enterButton.isClicked) 
 			{
-				//wasClicked = true;
 				player.encounterState.currentEncounter = currentEncounter;
 				stateMachine.ChangeState(player.encounterState);
 				return;
@@ -99,7 +107,7 @@ public class PlayerIdleState : PlayerState
 			if(!ServiceLocator.GetService<Inventory>().itemSlotsList.list.Exists(e => e.isOverflown == true))
 			{
 				// if a path is found, move to each destinations
-				if (movements.Count > 0 && gameManager.map.isTileWalkable(gameManager.map.mouseTile) && player.movementCost < player.currentFood)
+				if (movements.Count > 0 && gameManager.map.isTileWalkable(gameManager.map.mouseTile))
 				{
 					player.movements = movements;
 					PayFoodCost();
@@ -223,6 +231,10 @@ public class PlayerIdleState : PlayerState
 		foreach (TileType tileType in movements.Values)
 		{
 			int cost = tileType.cost;
+			if (ServiceLocator.GetService<Inventory>().stashDict.ContainsKey(ServiceLocator.GetService<Inventory>().tusk))
+				cost += 1;
+			if (ServiceLocator.GetService<Inventory>().stashDict.Count > ServiceLocator.GetService<Inventory>().inventoryItemSlot)
+				cost += 3;
 			player.movementCost += cost;
 		}
 	}

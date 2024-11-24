@@ -85,7 +85,7 @@ public class GameManager
 		ServiceLocator.AddService(inventory);
 		map = new Map(graphicsManager.tmxMap);
 		ServiceLocator.AddService(map);
-		player = new Player(graphicsManager.Idle(), new Vector2(2418, 858));
+		player = new Player(graphicsManager.Idle(), new Vector2(0,0));
 		ServiceLocator.AddService(player);
 	}
 

@@ -4,10 +4,10 @@ using static Raylib_cs.Raylib;
 
 public class EncounterVictory : Encounter
 {
-	private GraphicsManager graphicsManager;
-	private GameManager gameManager;
-	private Player player;
-	private Inventory inventory;
+	private GraphicsManager graphicsManager = ServiceLocator.GetService<GraphicsManager>();
+	private GameManager gameManager = ServiceLocator.GetService<GameManager>();
+	private Player player = ServiceLocator.GetService<Player>();
+	private Inventory inventory = ServiceLocator.GetService<Inventory>();
 
 	private Texture2D textureBg;
 	private Texture2D textureTitle;
@@ -21,11 +21,10 @@ public class EncounterVictory : Encounter
 	private int scoreValue;
 	private int scoreFood;
 
-	public EncounterVictory(string _name, Vector2 coords, bool _isRevealed) : base(_name, coords, _isRevealed)
+	public EncounterVictory(string _name, Vector2 _coords, bool _isRevealed) : base(_name, _coords, _isRevealed)
 	{
-		graphicsManager = ServiceLocator.GetService<GraphicsManager>();
-		gameManager = ServiceLocator.GetService<GameManager>();
-		player = ServiceLocator.GetService<Player>();
+		menuButton = new Button(new Rectangle(placeholder.X + 100, placeholder.Height, placeholder.Width / 3, 60), "Menu");
+		quitButton = new Button(new Rectangle(placeholder.Width - 100, placeholder.Height, placeholder.Width / 3, 60), "Quit");
 	}
 
 	public override void Show()

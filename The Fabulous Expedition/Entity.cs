@@ -66,11 +66,11 @@ public abstract class Entity
 		);
     }
 
-	public Vector2 ConvertMapToPixelPosition(Vector2 _position)
+	public Vector2 ConvertMapToPixelPosition(Vector2 _coords)
 	{
 		return new Vector2(
-			(_position.X * ServiceLocator.GetService<GameManager>().map.tileWidth) + ServiceLocator.GetService<GameManager>().map.tileWidth / 2,
-			(_position.Y * ServiceLocator.GetService<GameManager>().map.tileHeight) + ServiceLocator.GetService<GameManager>().map.tileHeight / 2
+			(_coords.X * ServiceLocator.GetService<GameManager>().map.tileWidth) + ServiceLocator.GetService<GameManager>().map.tileWidth / 2,
+			(_coords.Y * ServiceLocator.GetService<GameManager>().map.tileHeight) + ServiceLocator.GetService<GameManager>().map.tileHeight / 2
 		);
 	}
 }

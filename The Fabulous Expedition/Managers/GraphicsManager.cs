@@ -35,6 +35,7 @@ public class GraphicsManager
 		AddTexture("brownBar", "resources/images/UI/tile_0001.png");
 		AddTexture("book", "resources/images/UI/book.png");
 		AddTexture("victory", "resources/images/UI/victory.png");
+		AddTexture("gameOver", "resources/images/UI/gameOver.png");
 
 		// BACKGROUNDS
 		AddTexture("sky", "resources/images/menu/sky.png");
@@ -54,9 +55,15 @@ public class GraphicsManager
 		{
 			AddTexture("sanctuary-" + i, "resources/images/encounter/sanctuary/07da6561-3d07-4599-ab34-a7e4124783ce-" + i + ".png");
 		}
+		// hunt
+		for (int i = 0; i <= 57; i++)
+		{
+			AddTexture("hunt-" + i, "resources/images/encounter/hunt/bb1c1a0a-6ac1-4596-bf5b-a4ed8e84608f-" + i + ".png");
+		}
 		AddTexture("victoryBg", "resources/images/encounter/pyramide.png");
 		AddTexture("caveBg", "resources/images/encounter/cave entrée.png");
 		AddTexture("caveInside", "resources/images/encounter/cave intérieur.png");
+		AddTexture("elephantCemetery", "resources/images/encounter/cimetière éléphant.png");
 
 
 		// TEXT
@@ -75,12 +82,17 @@ public class GraphicsManager
 		AddTexture("goldenLama", "resources/images/inventory/Golden Lama.png");
 		AddTexture("goldenMask", "resources/images/inventory/Golden Mask.png");
 		AddTexture("torch", "resources/images/inventory/Torch.png");
+		AddTexture("tusk", "resources/images/inventory/Tusk.png");
+		AddTexture("mummy", "resources/images/inventory/Mummy.png");
+		AddTexture("tooth", "resources/images/inventory/Tooth.png");
+		AddTexture("wolfSkin", "resources/images/inventory/Wolf skin.png");
 
 		// TILES
 		for (int i = 0; i < tmxMap.Tilesets[0].Tiles.Count; i++)
 		{
 			AddTexture("tile_" + (i+1), tmxMap.Tilesets[0].Tiles[i].Image.Source);
 		}
+		AddTexture("wolfIdle", "resources/images/Map/pixel/TimberWolf.png");
 
 		// logo raylib
 		for (int i = 0; i <= 74; i++)
@@ -108,6 +120,7 @@ public class GraphicsManager
 	public void AddAllFonts()
 	{
 		AddFont("helvetica", "resources/fonts/Helvetica.ttf");
+		AddFont("helveticaBold", "resources/fonts/Helvetica-Bold.ttf");
 	}
 
 	public Animator Idle()
@@ -120,6 +133,12 @@ public class GraphicsManager
 	{
 		Texture2D texture = GetTexture("playerMove");
 		return new Animator(texture, 8, texture.Width / 4, new Rectangle(0, 0, texture.Width / 4, texture.Height));
+	}
+
+	public Animator WolfIdle()
+	{
+		Texture2D texture = GetTexture("wolfIdle");
+		return new Animator(texture, 16, texture.Width / 4, new Rectangle(0, 0, texture.Width / 4, texture.Height));
 	}
 
 	public void Close()

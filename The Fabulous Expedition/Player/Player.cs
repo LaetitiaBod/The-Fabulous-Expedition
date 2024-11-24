@@ -31,6 +31,7 @@ public class Player : Entity
     public override void Show()
     {
         base.Show();
+
 		stateMachine.Initialize(idleState);
 	}
 

@@ -32,7 +32,7 @@ public class SceneGameplay : Scene
 		gameManager.map.Show();
 		StopSound(audioManager.GetSound("menu"));
 		audioManager.PlaySound("gameplay");
-		gameManager.camera.Zoom = .6f;
+		gameManager.camera.Zoom = .5f;
 	}
 
 	public override void Update(float _dt)
@@ -97,7 +97,7 @@ public class SceneGameplay : Scene
 
 		if (IsKeyPressed(KeyboardKey.Space))
 		{
-			gameManager.camera.Zoom = .6f;
+			gameManager.camera.Zoom = .5f;
 			if (gameManager.player != null)
 				gameManager.camera.Target = gameManager.player.position;
 		}

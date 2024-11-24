@@ -168,7 +168,8 @@ public class EncounterSanctuary : Encounter
 			inventory.goldenPlate,
 			inventory.goldenMask,
 			inventory.goldenNecklace,
-			inventory.goldenLama
+			inventory.goldenLama,
+			inventory.mummy
 		};
 
 		int numberOfItems = 2;

@@ -22,7 +22,9 @@ public abstract class Encounter
 	public virtual void Draw() {
 		EndMode2D();
 	}
-	public virtual void Close() { }
+	public virtual void Close() {
+		ServiceLocator.GetService<Player>().encounterState.currentEncounter = null;
+	}
 
 	public virtual void TradeItem(ItemSlot _item) { }
 }
