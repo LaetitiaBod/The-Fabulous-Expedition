@@ -72,6 +72,7 @@ public class GraphicsManager
 		// PLAYER
 		AddTexture("playerIdle", "resources/images/Player/Idle_medium.png");
 		AddTexture("playerMove", "resources/images/Player/Walk_medium.png");
+		AddTexture("playerBoat", "resources/images/Player/Boat.png");
 
 		// ITEMS
 		AddTexture("apple", "resources/images/inventory/Apple.png");
@@ -133,6 +134,12 @@ public class GraphicsManager
 	{
 		Texture2D texture = GetTexture("playerMove");
 		return new Animator(texture, 8, texture.Width / 4, new Rectangle(0, 0, texture.Width / 4, texture.Height));
+	}
+
+	public Animator Boat()
+	{
+		Texture2D texture = GetTexture("playerBoat");
+		return new Animator(texture, 20, texture.Width/4, new Rectangle(0, 0, texture.Width/4, texture.Height));
 	}
 
 	public Animator WolfIdle()

@@ -19,7 +19,7 @@ public class PlayerMoveState : PlayerState
 		map = ServiceLocator.GetService<Map>();
 
 		// initialize the next node to reach
-		destination = player.movements.Keys.Last<Vector2>();
+		destination = player.movements.Keys.Last();
 	}
 
 	public override void Update()
@@ -40,7 +40,7 @@ public class PlayerMoveState : PlayerState
 			}
 		}
 
-		destination = player.movements.Keys.Last<Vector2>();
+		destination = player.movements.Keys.Last();
 
 		// move to the node
 		player.position = MoveTowards(player.position, destination, player.moveSpeed * GetFrameTime());
@@ -66,7 +66,7 @@ public class PlayerMoveState : PlayerState
 	}
 
 	// copied from the method MoveTowards from Unity
-	public static Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta)
+	public Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta)
 	{
 		float XOffset = target.X - current.X;
 		float YOffset = target.Y - current.Y;

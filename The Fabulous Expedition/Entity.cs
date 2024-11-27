@@ -19,7 +19,6 @@ public abstract class Entity
         anim = _anim;
         position = _position;
         scale = 1;
-        hitbox = new Rectangle(position, anim.texture.Width, anim.texture.Height);
 
         ALL.Add(this);
     }

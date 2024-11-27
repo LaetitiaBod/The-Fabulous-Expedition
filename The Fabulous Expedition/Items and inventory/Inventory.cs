@@ -40,16 +40,10 @@ public class Inventory
 		stashDict = new Dictionary<ItemData, InventoryItem>();
 		startingItems = new List<InventoryItem>
 		{
-			new InventoryItem(apple, 5),
-			new InventoryItem(meat, 2),
+			new InventoryItem(apple, 4),
+			new InventoryItem(meat, 3),
 			new InventoryItem(cheese, 5),
-			new InventoryItem(torch, 2),
-			new InventoryItem(goldenLama, 1),
-			new InventoryItem(goldenMask, 1),
-			//new InventoryItem(goldenNecklace, 1),
-			//new InventoryItem(goldenPlate, 1),
-			//new InventoryItem(mummy, 1),
-			//new InventoryItem(tusk, 1),
+			new InventoryItem(torch, 1),
 		};
 
 		AddStartingItems();

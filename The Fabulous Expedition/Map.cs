@@ -61,6 +61,9 @@ public class Map
 		fogOfWar = new FogOfWar();
 		encounterList = new List<Encounter>();
 		animWolf = ServiceLocator.GetService<GraphicsManager>().WolfIdle();
+
+		tileWidth = tmxMap.TileWidth;
+		tileHeight = tmxMap.TileHeight;
 	}
 
 	public void Show()
@@ -99,8 +102,6 @@ public class Map
 
 		tileWidth = tmxMap.TileWidth;
 		tileHeight = tmxMap.TileHeight;
-
-		player.position = player.ConvertMapToPixelPosition(new Vector2(30, 24));
 
 		animWolf = ServiceLocator.GetService<GraphicsManager>().WolfIdle();
 	}
@@ -174,9 +175,6 @@ public class Map
 					} 
 
 					DrawTexturePro(textureToDisplay, srcRect, tilesetRec, new Vector2(0, 0), 0, Color.White);
-
-					string text = currentTile.X.ToString() + "," + currentTile.Y.ToString();
-					DrawTextEx(ServiceLocator.GetService<GraphicsManager>().GetFont("helvetica"), text, new Vector2(x, currentTile.Y * tileHeight), 40, 1, Color.White);
 				}
 			}
 		}
