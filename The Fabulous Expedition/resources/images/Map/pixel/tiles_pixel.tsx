@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.0" name="tiles_pixel" tilewidth="156" tileheight="156" tilecount="14" columns="0">
+<tileset version="1.10" tiledversion="1.11.0" name="tiles_pixel" tilewidth="156" tileheight="156" tilecount="16" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" probability="0.8">
   <image source="008.png" width="156" height="156"/>
@@ -42,5 +42,11 @@
  </tile>
  <tile id="15">
   <image source="016.png" width="156" height="156"/>
+ </tile>
+ <tile id="16">
+  <image source="017.png" width="156" height="156"/>
+ </tile>
+ <tile id="17">
+  <image source="018.png" width="156" height="156"/>
  </tile>
 </tileset>
